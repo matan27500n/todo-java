@@ -9,19 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloWorldController {
 
-	@GetMapping("/hello-world")
-	public String helloWorld() {
-		return "Hello World";
-	}
-
-	@GetMapping("/hello-world-bean")
-	public HelloWorldBean helloWorldBean() {
-		return new HelloWorldBean("Hello World - changed");
-		// throw new RuntimeException("Some error has happend! Contact support at ***");
-	}
+	private Tip tip = new Tip();
 
 	@GetMapping("/hello-world/path-variable/{name}")
 	public HelloWorldBean helloWorldPathVariable(@PathVariable String name) {
-		return new HelloWorldBean(String.format("Hello World, %s", name));
+		return new HelloWorldBean("Hello " + name + ", " + tip.getRandomTip());
 	}
 }
