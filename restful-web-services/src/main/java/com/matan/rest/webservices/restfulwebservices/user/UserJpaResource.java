@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.matan.rest.webservices.restfulwebservices.jwt.JwtUserDetails;
@@ -16,12 +17,12 @@ import com.matan.rest.webservices.restfulwebservices.jwt.JwtUserDetails;
 public class UserJpaResource {
 
 	@Autowired
-	private UserJpaRepository userJpaRepository;
+	private static UserJpaRepository userJpaRepository;
 
-	List<JwtUserDetails> inMemoryUserList = new ArrayList<>();
+	static List<JwtUserDetails> inMemoryUserList = new ArrayList<>();
 
 	@PostMapping("/register-user")
-	public ResponseEntity<Void> registerUser(User user) {
+	public static ResponseEntity<Void> registerUser(@RequestBody User user) {
 		userJpaRepository.save(user);
 		inMemoryUserList.add(new JwtUserDetails(user.getId(), user.getUsername(), user.getPassword(), "Customer"));
 		return ResponseEntity.ok().build();
