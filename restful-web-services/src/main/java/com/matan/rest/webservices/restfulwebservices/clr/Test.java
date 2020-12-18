@@ -2,12 +2,9 @@ package com.matan.rest.webservices.restfulwebservices.clr;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-
 import com.matan.rest.webservices.restfulwebservices.jwt.JwtInMemoryUserDetailsService;
 
-@Component
 @Order(value = 1)
 @Service
 public class Test implements CommandLineRunner {

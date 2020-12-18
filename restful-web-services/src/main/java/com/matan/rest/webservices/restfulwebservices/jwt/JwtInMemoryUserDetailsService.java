@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
-
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -32,6 +31,13 @@ public class JwtInMemoryUserDetailsService implements UserDetailsService {
 		System.out.println("Enter password");
 		password = scanner.next();
 		id++;
+		inMemoryUserList.add(new JwtUserDetails(id, username, password, role));
+	}
+
+	public void addUser(String user, String pass) {
+		id++;
+		username = user;
+		password = pass;
 		inMemoryUserList.add(new JwtUserDetails(id, username, password, role));
 	}
 

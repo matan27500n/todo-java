@@ -15,12 +15,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.matan.rest.webservices.restfulwebservices.jwt.JwtInMemoryUserDetailsService;
+
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class TodoJpaResource {
 
 	@Autowired
 	private TodoJpaRepository todoJpaRepository;
+
+	@PostMapping("/jpa/users/{username}/{password}")
+	public ResponseEntity<Void> registerUser(@PathVariable String username, @PathVariable String password) {
+		JwtInMemoryUserDetailsService service = new JwtInMemoryUserDetailsService();
+		service.addUser(username, password);
+		return ResponseEntity.noContent().build();
+	}
 
 	@GetMapping("/jpa/users/{username}/todos")
 	public List<Todo> getAllTodos(@PathVariable String username) {
